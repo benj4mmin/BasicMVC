@@ -1,0 +1,225 @@
+﻿@model IEnumerable<BasicMVC.Models.UserChangeLog>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullNameOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullNameNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address1Old)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address1New)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address2Old)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address2New)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketsOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketsNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxTicketsOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxTicketsNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTicketsOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTicketsNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDateOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDateNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RetireeOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RetireeNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequireTransportationOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequireTransportationNew)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddWho)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullNameOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullNameNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address1Old)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address1New)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address2Old)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address2New)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketsOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketsNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxTicketsOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxTicketsNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestTicketsOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestTicketsNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDateOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDateNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RetireeOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RetireeNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequireTransportationOld)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequireTransportationNew)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddWho)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

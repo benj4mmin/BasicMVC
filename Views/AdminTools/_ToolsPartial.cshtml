@@ -1,0 +1,14 @@
+﻿@*@model System.Data.DataTable
+
+    @Html.DevExpress().GridView(
+    settings =>
+    {
+        settings.Name = "Tools";
+        settings.CallbackRouteValues = new { Controller = "AdminTools", Action = "ToolsPartial" };
+        settings.Width = Unit.Percentage(100);
+        settings.Height = Unit.Pixel(180);
+        settings.ControlStyle.CssClass = "uploadFilesContainerPanel";
+        settings.SettingsPager.PageSize = 200;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowAllRecords;
+    }
+    ).Bind(Model).GetHtml()*@

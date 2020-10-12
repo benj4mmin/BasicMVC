@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32710fd9a6014e80a10a22d2c6c668e1" Name="Diagram1" >
+        <EntityTypeShape EntityType="EnrollmentDataModel.SiteScheduler" Width="1.5" PointX="2.5" PointY="0.625" />
+        <EntityTypeShape EntityType="EnrollmentDataModel.UserLogin" Width="1.5" PointX="4.25" PointY="0.625" />
+        <EntityTypeShape EntityType="EnrollmentDataModel.UserTicketForm" Width="1.5" PointX="6.25" PointY="0.75" />
+        <EntityTypeShape EntityType="EnrollmentDataModel.UserChangeLog" Width="1.5" PointX="2.875" PointY="3" />
+        <EntityTypeShape EntityType="EnrollmentDataModel.ContactInformation" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="EnrollmentDataModel.HomeInformation" Width="1.5" PointX="7.375" PointY="3.125" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

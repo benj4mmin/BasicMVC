@@ -1,0 +1,23 @@
+﻿<h2>Thank you for registering your tickets!</h2>
+@Styles.Render("~/Content/css")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+
+                   
+             
+                <img src="~/Content/Images/poster.PNG" width="500" height="600" />
+           
+      
+}
+
+
+<div>
+    @Html.ActionLink("Edit Data", "Edit", "UserTicketForms", new { area = "" }, new { @class = "hideTicketForm" })
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/css")
+}

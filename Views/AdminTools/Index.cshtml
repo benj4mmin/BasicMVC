@@ -1,0 +1,410 @@
+﻿@*@Html.DevExpress().UploadControl(settings =>
+        {
+            settings.Name = "UploadControlFile";
+        settings.CallbackRouteValues = new { Controller = "AdminTools", Action = "UploadControlUpload" };
+        settings.ShowUploadButton = true;
+        settings.ShowProgressPanel = true;
+        settings.NullText = "Click here to browse files...";
+        settings.ClientSideEvents.FileUploadComplete = "function(s, e) { GridView1.PerformCallback({ path: e.callbackData}); }";
+    }).GetHtml()*@
+@model BasicMVC.Models.SiteControlModel
+<!DOCTYPE html>
+
+@Styles.Render("~/Content/DragAndDrop.css")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+        function onUploadControlFileUploadComplete(s, e) {
+            if (e.isValid)
+                $("#uploadedImage").attr("src", e.callbackData);
+            setElementVisible("uploadedImage", e.isValid);
+        }
+        function onImageLoad() {
+            var externalDropZone = $("#externalDropZone");
+            var uploadedImage = $("#uploadedImage");
+            uploadedImage.css({
+                left: (externalDropZone.width() - uploadedImage.width()) / 2,
+                top: (externalDropZone.height() - uploadedImage.height()) / 2
+            });
+            setElementVisible("dragZone", false);
+        }
+        function setElementVisible(elementId, visible) {
+            var el = $("#" + elementId);
+            if (visible)
+                el.show();
+            else
+                el.hide();
+        }
+        function onFileUploadComplete(e) {
+            if (e.callbackData) {
+                var fileData = e.callbackData.split('|');
+                var fileName = fileData[0],
+                    fileUrl = fileData[1],
+                    fileSize = fileData[2];
+                DXUploadedFilesContainer.AddFile(fileName, fileUrl, fileSize);
+            }
+        }
+
+        //function ShowMessage() {
+        //    var result = confirm("By clicking submit, you are turning the site access on or off. Do you want to confirm your changes?");
+        //    if (result) {
+        //        return true;
+        //    } else {
+        //        return false;
+        //    }
+        //}
+
+        //function storeMsg() {
+        //    var text = document.getElementById("SiteMessage").value;
+        //    document.cookie = "text=" + text + "; path=/";
+        //}
+
+        @*function showMessage() {
+            var text = document.getElementById("SiteMessage").value;
+            document.cookie = "text=" + text + "; path=/";
+            if (document.getElementById("ON")) {
+                var link = '@Url.Action("SiteOn","AdminTools")
+                window.location.href = link;
+            }
+            else
+                var link = '@Url.Action("SiteOff","AdminTools")
+                window.location.href = link;
+        }*@
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            // hide all
+            $(".allToggle").hide();
+
+            // first img section dd1
+            $("#dd1.showHide").click(function () {
+                $("#dropDown1").toggle();
+                        });
+
+            // second img section dd2
+            $("#dd2.showHide").click(function () {
+                $("#dropDown2").toggle();
+                        });
+
+            // third img section dd3
+            $("#dd3.showHide").click(function () {
+                $("#dropDown3").toggle();
+                        });
+
+            // first form section dd4
+            $("#dd4.showHide").click(function () {
+                $("#dropDown4").toggle();
+                        });
+
+            // dd containing change site message
+            $("#dd5.showHide").click(function () {
+                $("#dropDown5").toggle();
+                        });
+
+            // dd containing turn site on or off
+            $("#dd6.showHide").click(function () {
+                $("#dropDown6").toggle();
+                        });
+
+            // expand all
+            $("#allBtn.showHide").click(function () {
+                $(".allToggle").toggle();
+                        });
+
+
+                    });
+
+/**/</script>
+</head>
+
+
+<body>
+    <div class="container w-100 m-2">
+        <div class="w-100 row">
+            <div class="col-9 border border-dark rounded p-1">Admin Tools</div>
+            <div><a class="showHide btn btn-outline-secondary" id="allBtn">Expand All</a></div>
+        </div>
+    </div>
+    @*<div id="externalDropZone" class="dropZoneExternal">
+            <div id="dragZone">
+                <span class="dragZoneText">Drag an image here</span>
+            </div>
+            <img id="uploadedImage" src="#" alt="" style="display: none" onload="onImageLoad()" />
+            <div id="dropZone" style="display: none">
+                <span class="dropZoneText">Drop an image here</span>
+            </div>
+        </div>*@
+    <div class="container m-2 p-1">
+        <div id="navLogo" class="overlay border rounded border-dark">
+            <button class="showHide btn btn-outline-secondary btn-block" id="dd1"><h3>Update Home Page Logo</h3></button>
+            <div id="dropDown1" class="allToggle align-items-center">
+                @using (Html.BeginForm("UploadControlUpload", "UploadControl", FormMethod.Post))
+                {
+                    @Html.DevExpress().UploadControl(settings =>
+                    {
+                        settings.Name = "UploadControl";
+                        settings.CallbackRouteValues = new { Controller = "UploadControl", Action = "UploadControlUpload" };
+
+                                settings.AdvancedModeSettings.EnableMultiSelect = true;
+                                        settings.AdvancedModeSettings.EnableFileList = true;
+                                        settings.AdvancedModeSettings.EnableDragAndDrop = true;
+
+                        settings.ShowUploadButton = true;
+                        settings.ShowProgressPanel = true;
+
+
+                        settings.ValidationSettings.Assign(PGBOSTON.Controllers.UploadControlSettings.UploadImgValidationSettings);
+                    }).GetHtml()
+                    <br /><br />
+                    @Html.DevExpress().Label(
+                        settings =>
+                        {
+                            settings.Name = "AllowedLogoExtensionsLabel";
+                            settings.Text = "Allowed file extensions: .jpg, .jpeg, .png";
+                            settings.ControlStyle.Font.Size = FontUnit.Point(8);
+                        }).GetHtml()
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container m-2 p-1">
+        <div id="navBanner" class="overlay border rounded border-dark">
+            <button class="showHide btn btn-outline-secondary btn-block" id="dd2"><h3>Update Home Page Banner</h3></button>
+            <div id="dropDown2" class="allToggle">
+                @using (Html.BeginForm("UploadBannerUpload", "UploadControl", FormMethod.Post))
+                {
+                    @Html.DevExpress().UploadControl(settings =>
+                    {
+                        settings.Name = "UploadBanner";
+                        settings.CallbackRouteValues = new { Controller = "UploadControl", Action = "UploadBannerUpload" };
+
+                                settings.AdvancedModeSettings.EnableMultiSelect = true;
+                                        settings.AdvancedModeSettings.EnableFileList = true;
+                                        settings.AdvancedModeSettings.EnableDragAndDrop = true;
+
+                        settings.ShowUploadButton = true;
+                        settings.ShowProgressPanel = true;
+
+
+                        settings.ValidationSettings.Assign(PGBOSTON.Controllers.UploadControlSettings.UploadImgValidationSettings);
+                    }).GetHtml()
+                    <br /><br />
+                    @Html.DevExpress().Label(
+                        settings =>
+                        {
+                            settings.Name = "AllowedBannerExtensionsLabel";
+                            settings.Text = "Allowed file extensions: .jpg, .jpeg, .png";
+                            settings.ControlStyle.Font.Size = FontUnit.Point(8);
+                        }).GetHtml()
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container m-2 p-1">
+        <div id="navContact" class="overlay border rounded border-dark">
+            <button class="showHide btn btn-outline-secondary btn-block" id="dd3"><h3>Update Contact Page Dates Banner</h3></button>
+            <div id="dropDown3" class="allToggle">
+                @using (Html.BeginForm("UploadContactUpload", "UploadControl", FormMethod.Post))
+                {
+                    @Html.DevExpress().UploadControl(settings =>
+                    {
+                        settings.Name = "UploadContact";
+                        settings.CallbackRouteValues = new { Controller = "UploadControl", Action = "UploadContactUpload" };
+
+                                settings.AdvancedModeSettings.EnableMultiSelect = true;
+                                        settings.AdvancedModeSettings.EnableFileList = true;
+                                        settings.AdvancedModeSettings.EnableDragAndDrop = true;
+
+                        settings.ShowUploadButton = true;
+                        settings.ShowProgressPanel = true;
+
+
+                        settings.ValidationSettings.Assign(PGBOSTON.Controllers.UploadControlSettings.UploadImgValidationSettings);
+                    }).GetHtml()
+                    <br /><br />
+                    @Html.DevExpress().Label(
+                        settings =>
+                        {
+                            settings.Name = "AllowedContactExtensionsLabel";
+                            settings.Text = "Allowed file extensions: .jpg, .jpeg, .png";
+                            settings.ControlStyle.Font.Size = FontUnit.Point(8);
+                        }).GetHtml()
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container m-2 p-1">
+        <div id="navForm" class="overlay border rounded border-dark">
+            <button class="showHide btn btn-outline-secondary btn-block" id="dd4"><h3>Upload Customer Ticket Info</h3></button>
+            <div id="dropDown4" class="allToggle">
+                @using (Html.BeginForm("MultiFileSelection", "UploadControl", FormMethod.Post))
+                {
+                    <div class="uploadContainer">
+                        @Html.DevExpress().UploadControl(
+                            settings =>
+                                 {
+                                settings.Name = "MultiFileSelection";
+                                settings.CallbackRouteValues = new { Controller = "UploadControl", Action = "MultiFileSelection" };
+
+                                settings.Width = Unit.Percentage(100);
+                                settings.ShowProgressPanel = true;
+                                settings.ShowUploadButton = true;
+                                settings.AdvancedModeSettings.EnableMultiSelect = true;
+                                settings.AdvancedModeSettings.EnableFileList = true;
+                                settings.AdvancedModeSettings.EnableDragAndDrop = true;
+                                settings.NullText = "Select file...";
+
+                                settings.ValidationSettings.Assign(PGBOSTON.Controllers.UploadControlSettings.UploadValidationSettings);
+
+                                //settings.ClientSideEvents.FilesUploadStart = "function(s,e) { DXUploadedFilesContainer.Clear(); }";
+                                //settings.ClientSideEvents.FileUploadComplete = "function(s,e) { onFileUploadComplete(e); }";
+                            }).GetHtml()
+
+                        <br /><br />
+                        @Html.DevExpress().Label(
+                            settings =>
+                            {
+                                settings.Name = "AllowedFileExtensionsLabel";
+                                settings.Text = "Allowed file extensions: .xlsx, .xls";
+                                settings.ControlStyle.Font.Size = FontUnit.Point(8);
+                            }).GetHtml()
+                        <br />
+                        @Html.DevExpress().Label(
+                            settings =>
+                            {
+                                settings.Name = "MaxFileSizeLabel";
+                                settings.Text = "Maximum file size: 4 MB.";
+                                settings.ControlStyle.Font.Size = FontUnit.Point(8);
+                            }).GetHtml()
+
+                    </div>
+                    <div class="filesContainer">
+                        @Html.Partial("_UploadedFilesContainer")
+                    </div>
+                    <div class="contentFooter">
+                        @*<p class="Note">
+                        <b>Note</b>: All files uploaded to this will be automatically deleted in 5 minutes.
+                    </p>*@
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    @*<div class="border border-dark rounded m-2 p-1">
+        <button class="showHide float-right" id="dd5"><i class="accordion"></i></button>
+        <div id="navMsg" class="overlay">
+            <h3>Update Home Page Message</h3>
+            <div id="dropDown5" class="allToggle">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SiteMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SiteMessage, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SiteMessage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default bg-dark" style="color:antiquewhite" onclick="javascript:return StoreMsg();" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
+    @*<div class="border border-dark rounded m-2 p-1">
+        <button class="showHide float-right" id="dd6"><i class="accordion"></i></button>
+        <div id="navSite" class="overlay">
+            <h3>Turn Site ON or OFF</h3>
+            <div id="dropDown6" class="allToggle">
+                @using (Html.BeginForm())
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ToggleSite, htmlAttributes: new { @class = "cont label col-md-2" })
+                        <div class="dx-radiogroup-horizontal">
+                            ON
+                            @Html.RadioButtonFor(model => model.ToggleSite, "ON")
+                            OFF
+                            @Html.RadioButtonFor(model => model.ToggleSite, "OFF")
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default bg-dark" style="color:antiquewhite" onclick="javascript:return ShowMessage();" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                }
+            </div>
+        </div>
+    </div>*@
+
+    @Html.Partial("_ToolsPartial")
+
+    <p>
+        @Html.ActionLink("Edit Contact Information", "ContactInformation", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+    </p>
+    <p>
+        @Html.ActionLink("Edit Homepage", "HomeInformation", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+    </p>
+    <p>
+        <button onclick="window.open('https://PLACEHOLDER','_blank')" class="btn btn-outline-secondary">Navigator Reports</button>
+    </p>
+    <p>
+        @Html.ActionLink("Go Back", "Index", "UserTicketForms", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+    </p>
+    <div>
+
+        @*@(Html.DevExpress().DataGrid<PGBOSTON.Models.UserTicketForm>()
+                .Columns(columns =>
+                    {
+
+                    columns.AddFor(m => m.UserId);
+
+                    columns.AddFor(m => m.Email);
+
+                    columns.AddFor(m => m.Address1);
+
+                    columns.AddFor(m => m.Address2);
+
+                    columns.AddFor(m => m.City);
+
+                    columns.AddFor(m => m.State);
+
+                    columns.AddFor(m => m.Zip);
+
+                    columns.AddFor(m => m.Country);
+
+                    columns.AddFor(m => m.MaxTickets);
+
+                    columns.AddFor(m => m.RequestTickets);
+
+                    columns.AddFor(m => m.RequestDate);
+
+                    columns.AddFor(m => m.Retiree);
+
+                    columns.AddFor(m => m.RequireTransportation);
+
+                    columns.AddFor(m => m.Tickets);
+
+                    columns.AddFor(m => m.FirstName);
+
+                    columns.AddFor(m => m.LastName);
+                })
+            )*@
+
+    </div>
+</body>
+</html>

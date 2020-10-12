@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="EnrollmentDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="EnrollmentDataModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EnrollmentDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EnrollmentDataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SiteSchedulers" EntityType="EnrollmentDataModel.SiteScheduler" />
+          <EntitySet Name="UserLogins1" EntityType="EnrollmentDataModel.UserLogin" />
+          <EntitySet Name="UserTicketForms" EntityType="EnrollmentDataModel.UserTicketForm" />
+          <EntitySet Name="UserChangeLogs" EntityType="EnrollmentDataModel.UserChangeLog" />
+          <EntitySet Name="ContactInformations" EntityType="EnrollmentDataModel.ContactInformation" />
+          <EntitySet Name="HomeInformations" EntityType="EnrollmentDataModel.HomeInformation" />
+        </EntityContainer>
+        <EntityType Name="SiteScheduler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActiveStartDate" Type="String" Nullable="false" />
+          <Property Name="ActiveEndDate" Type="String" Nullable="false" />
+          <Property Name="AddWho" Type="String" Nullable="false" />
+          <Property Name="EditWho" Type="String" Nullable="false" />
+          <Property Name="SiteMessage" Type="String" Nullable="false" />
+          <Property Name="ToggleSite" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Property1" Type="String" Nullable="false" />
+          <Property Name="Property2" Type="String" Nullable="false" />
+          <Property Name="Property3" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTicketForm">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="UserChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="ContactInformation">
+          <Key>
+            <PropertyRef Name="ContactInformationId" />
+          </Key>
+          <Property Name="ContactInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="HomeInformation">
+          <Key>
+            <PropertyRef Name="HomeInformationId" />
+          </Key>
+          <Property Name="HomeInformationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="EnrollmentDataModel" />
+        <Alias Key="Target" Value="EnrollmentDataModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="EnrollmentDataModelContainer" StorageEntityContainer="EnrollmentDataModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

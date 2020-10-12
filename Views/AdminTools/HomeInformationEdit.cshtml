@@ -1,0 +1,59 @@
+﻿@model BasicMVC.Models.HomeInformation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <form id="myForm">
+
+        @Html.HiddenFor(m => m.HomeInformationID)
+
+        Message: @Html.TextAreaFor(model => model.Message, new { @class = "ContactEditTextBox form-control", @placeholder = "Message" })
+
+        <a href="#" id="btnSubmit" class="btn btn-success btn-block">
+
+            <span>Save</span>
+
+        </a>
+
+    </form>
+
+</div>
+<p style="margin-top:30px">
+
+    @Html.ActionLink("Go Back", "HomeInformation", "AdminTools", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+
+</p>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            $("#loaderDiv").show();
+
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/AdminTools/HomeInformation",
+                data: myformdata,
+                success: function () {
+                    $("#loaderDiv").hide();
+                    $("#myModal").modal("hide");
+                    var link = '@Html.Raw(@Url.Action("HomeInformation","AdminTools"))';
+                    window.location.href = link;
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>

@@ -1,0 +1,66 @@
+﻿@model BasicMVC.Models.ContactInformation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <form id="myForm">
+        @Html.HiddenFor(m => m.ContactInformationID)
+
+        Message: @Html.TextBoxFor(model => model.Message, new { @class = "ContactEditTextBox form-control", @placeholder = "Message" })
+        Phone: @Html.TextBoxFor(model => model.Phone, new { @class = "ContactEditTextBox form-control", @placeholder = "Phone", id = "ContactEditTextBox" })
+        Email: @Html.TextBoxFor(model => model.Email, new { @class = "ContactEditTextBox form-control", @placeholder = "Email", id = "ContactEditTextBox" })
+        Ticket Link: @Html.TextBoxFor(model => model.ticketLink, new { @class = "ContactEditTextBox form-control", @placeholder = "ticketLink", id = "ContactEditTextBox" })
+        Ticket Link Message: @Html.TextBoxFor(model => model.ticketLinkMessage, new { @class = "ContactEditTextBox form-control", @placeholder = "ticketLinkMessage", id = "ContactEditTextBox" })
+        Ticket Instructions: @Html.TextBoxFor(model => model.ticketInstructions, new { @class = "ContactEditTextBox form-control", @placeholder = "ticketInstructions", id = "ContactEditTextBox" })
+
+
+        <a href="#" id="btnSubmit" class="btn btn-success btn-block">
+            <span>Save</span>
+        </a>
+
+    </form>
+
+    @*<div style="text-align:center;display:none" id="loaderDiv">
+            <img src="~/Content/InternetSlowdown_Day.gif" width="150" />
+        </div>*@
+
+</div>
+<p style="margin-top:30px">
+
+    @Html.ActionLink("Go Back", "ContactInformation", "AdminTools", new { area = "" }, new { @class = "btn btn-outline-secondary" })
+
+</p>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            $("#loaderDiv").show();
+
+            var myformdata = $("#myForm").serialize();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/AdminTools/ContactInformation",
+                data: myformdata,
+                success: function () {
+                    $("#loaderDiv").hide();
+                    $("#myModal").modal("hide");
+                    var link = '@Html.Raw(@Url.Action("ContactInformation","AdminTools"))';
+                    window.location.href = link;
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>

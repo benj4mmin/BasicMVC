@@ -1,0 +1,82 @@
+﻿@model BasicMVC.Models.Userlogin
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@Styles.Render("~/Content/css")
+
+<!DOCTYPE html>
+<head runat="server">
+    <script type="text/javascript">
+
+        //var text = document.cookie.split(";")[0].split("=")[1];
+        //document.getElementById("SiteMsg").innerHTML = text;
+
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+
+        </div>
+        <table>
+            <tr>
+                <th class="pull-right" style="margin-top:6%;">
+                    <img src="~/Content/Images/banner.jpg" width="600" height="300" style="margin-left:5%; float: right;" />
+                </th>
+                <th class="pull-left">
+                    <div class="form-horizontal">
+                        @if (ViewBag.HomeList != null)
+                        {
+                            foreach (var item in ViewBag.HomeList)
+                            {
+
+                                <span style="white-space:pre-line">@item.Message</span>
+
+                            }
+                        }
+
+                        @*<h2>Login</h2>*@
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-5" style="margin-left:5%;">
+                                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-5" })
+                            <div class="col-md-5" style="margin-left:5%;">
+                                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p style="color: red;">@ViewBag.ErrorMessage</p>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Login" class="btn btn-outline-secondary" />
+                            </div>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    }
+
+
+    <div>
+        @Html.ActionLink("Edit Data", "Edit", "UserTicketForms", new { area = "" }, new { @class = "hideTicketForm" })
+    </div>
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/css")
+}
+</html>
